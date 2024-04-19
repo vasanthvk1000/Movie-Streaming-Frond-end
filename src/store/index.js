@@ -85,6 +85,15 @@ import {
       return movies;
     }
   );
+  export const getUsersDisLikedMovies = createAsyncThunk(
+    "netflix/getDisLiked",
+    async (email) => {
+      const {
+        data: { movies },
+      } = await axios.get(`http://localhost:5000/api/user/disliked/${email}`);
+      return movies;
+    }
+  );
   
   export const removeMovieFromLiked = createAsyncThunk(
     "netflix/deleteLiked",

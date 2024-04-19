@@ -11,6 +11,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 import { useDispatch } from "react-redux";
 import { removeMovieFromLiked } from "../store";
+import { getUsersLikedMovies } from "../store";
+import { getUsersDisLikedMovies } from "../store";
 import video from "../assets/video.mp4";
 
 export default React.memo(function Card({ index, movieData, isLiked = false }) {
@@ -73,8 +75,21 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
                   title="Play"
                   onClick={() => navigate("/player")}
                 />
-                <RiThumbUpFill title="Like" />
-                <RiThumbDownFill title="Dislike" />
+                <RiThumbUpFill
+                  title="Like"
+                  onClick={() =>
+                    dispatch(
+                      getUsersLikedMovies({ movieId: movieData.id, email })
+                    )
+                  }
+                />
+                <RiThumbDownFill title="Dislike" 
+                 onClick={() =>
+                  dispatch(
+                    getUsersDisLikedMovies({ movieId: movieData.id, email })
+                  )
+                }
+                />
                 {isLiked ? (
                   <BsCheck
                     title="Remove from List"
@@ -94,8 +109,8 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
             </div>
             <div className="genres flex">
               <ul className="flex">
-                {movieData.genres.map((genre) => (
-                  <li>{genre}</li>
+                {movieData.genres.map((genre, index) => (
+                  <li key={index}>{genre}</li>
                 ))}
               </ul>
             </div>

@@ -19,6 +19,7 @@ export default React.memo(function CardSlider({ data, title }) {
   };
 
   return (
+    
     <Container
       className="flex column"
       showControls={showControls}
@@ -48,6 +49,7 @@ export default React.memo(function CardSlider({ data, title }) {
         </div>
       </div>
     </Container>
+    
   );
 });
 const Container = styled.div`

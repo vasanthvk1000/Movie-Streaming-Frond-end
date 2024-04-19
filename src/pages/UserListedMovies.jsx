@@ -23,6 +23,7 @@ export default function UserListedMovies() {
 
   useEffect(() => {
     if (email) {
+      // console.log(email)
       dispatch(getUsersLikedMovies(email));
     }
   }, [email]);
